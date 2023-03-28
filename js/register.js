@@ -1,12 +1,12 @@
 $(document).ready(function() {
   $('form').submit(function(event) {
-    event.preventDefault(); // prevent the form from submitting normally
+    event.preventDefault(); 
     var formData = {
       email: $('#email').val(),
       firstName: $('#firstName').val(),
       lastName: $('#lastName').val(),
       password: $('#password').val(),
-      // confirmPassword: $('#Conform Password').val()
+      
     };
 
     $.ajax({

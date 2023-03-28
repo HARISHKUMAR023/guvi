@@ -1,10 +1,10 @@
 $(document).ready(function() {
   // Retrieve user data from server using AJAX
-  // extract unique_reference_id from URL
+ 
   $('#logme').on('click', (event) => {
     event.preventDefault();
     clearLocalStorage()
-    // redirect the user to the login page or homepage
+    // redirect the user to the index.html
     window.location.href = './index.html';
   });
   const urlParams = new URLSearchParams(window.location.search);
@@ -46,7 +46,7 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the form from being reset
     // Enable input fields for editing
     $("input, textarea").removeAttr("disabled");
-    // Show save and cancel buttons with fade effect
+    // Show save and cancel buttons
     $("#edit-btn").fadeOut(200, function() {
       $("#save-btn, #cancel-btn").fadeIn(200);
     });

@@ -20,16 +20,15 @@ $password = mysqli_real_escape_string($conn, $_POST['password']);
 $query = "SELECT * FROM users WHERE email='$email'";
 $result = mysqli_query($conn, $query);
 
-// check if query succeeded and if user was found
+
 if ($result && mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
   $stored_password = $row['password'];
-  // verify password
+  
   if (password_verify($password, $stored_password)) {
-    // authentication successful
-    // echo json_encode(array('status'=>'succes'));
+   
       
-    // $unique_reference_id = $row['unique_reference_id'];
+   
     $unique_reference_id = $row['randomid'];
     echo json_encode(array('status' => 'success', 'unique_reference_id' => $unique_reference_id));
     
