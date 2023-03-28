@@ -1,0 +1,16 @@
+{
+    "name": "harish/guvi",
+    "autoload": {
+        "psr-4": {
+            "Harish\\Guvi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "harish"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^1.15"
+    }
+}

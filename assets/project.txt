@@ -1,0 +1,59 @@
+mysql database
+    tabel users
+            email, first_name, last_name, password, randomid, created_at, updated_at
+            randomid is the unique reference each users
+---redies shared database---
+table name = session
+      table fields
+            unique_reference_id(randomid  from users mysql table)
+            session_id(a randomid number used for session creations)
+            session_start_time(timestamp in milli_sec)
+            session_end_time(timestamp in milli_sec)
+
+            return session_id to browser always
+
+            when browser send the session id for update profile screen -> read unique_reference_id from session_table
+            and update profile table in mongo database
+
+**** mongo db ****
+mongo db store the data in json format 
+    {unique_reference_id:0jdkdh082hk,
+     first_name:harish,
+     last_name:kumar,
+     birth_date:26-03-2023,
+     phone_number:999934396,
+     gaurdian_name:narasimman,
+     gaurdian_phone_number:9639303734,
+     address:{
+        address_line1: dsafdad,
+        address_line2: ajdflj,
+        landmark:adslkfj,
+        pincode:jadskfd,
+        state:tamilnadu  
+     }
+    }
+registration->
+      1.when brouser submit regestration form ,then create randomid and store in records in mysql user table
+      2.create a profile in mongo db with unique_reference_id as key id , store the possable valus come in the request form submission
+      3.return sucessues resonse to the browser(ur account setup completed sucessues fully)
+login:
+   1.when borouser query the mysql users tabel with the user id and validate with password
+   2.if the userid and password is both are match , create a session table in redies database
+   3.using unique_reference_id (randomid) return from mysql create the session_table  with session_id,session_start_time,session_end_time
+     in redies database 
+   4.read mangodb for profile information 
+     and return session_id , other profile detiales to the browser and show profile screen
+update:
+      1.when request come from the browser to update the profile information , 
+        read the unique_reference_id form redies session database using session_id passed in the request
+      2.when reading unique_reference_id, validate the session expried or not
+      3.if session expired return error to browser and logout to index screen with session expired message
+      4.if session is not expired ,read the mongodb with unique_reference_id then update 
+        with the changed values to the mongo db 
+      5.if the mongodb updated sucesses fully ,then return the sucesses message with all profile detiales to the 
+        browser profile sreeen
+      6.display information sucessesfully update message in profile screen 
+ 
+
+              
+      
