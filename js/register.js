@@ -18,7 +18,7 @@ $(document).ready(function() {
     })
     .done(function(data) {
       console.log(data);
-      alert("the register sucessfull") // log the response from the server to the console
+      alert("your account created sucessfull") // log the response from the server to the console
       
        // Clear form fields
        $('#email').val('');

@@ -1,4 +1,8 @@
 <?php
+// Start Redis session
+ini_set('session.save_handler', 'redis');
+ini_set('session.save_path', 'tcp://redis-15057.c305.ap-south-1-1.ec2.cloud.redislabs.com:15057?timeout=2&auth=l7c3WlSesEfIzg2HXnFIay6ZgimmkonR');
+session_start();
 
 $host = "localhost";
 $username = "root";
@@ -24,23 +28,25 @@ $result = mysqli_query($conn, $query);
 if ($result && mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
   $stored_password = $row['password'];
-  
+
   if (password_verify($password, $stored_password)) {
-   
-      
-   
-    $unique_reference_id = $row['randomid'];
-    echo json_encode(array('status' => 'success', 'unique_reference_id' => $unique_reference_id));
+    // Successful login
     
+    // Store user information in session variables
+    $_SESSION['email'] = $email;
+    $_SESSION['unique_reference_id'] = $row['randomid'];
+    
+    // Return success response
+    echo json_encode(array('status' => 'success', 'unique_reference_id' => $_SESSION['unique_reference_id']));
   } else {
-    // authentication failed
+    // Authentication failed
     echo 'failure';
   }
 } else {
-  // email not found
-  echo 'failure';
+  // Email not found
+  echo 'email not found';
 }
 
-// close database connection
+// Close database connection
 mysqli_close($conn);
 ?>
